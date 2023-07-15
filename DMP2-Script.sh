@@ -16,7 +16,7 @@ DOCKER_CONTAINER_NETWORK_IO_RX_VALUE_FILE=NetIO.tmp
 
 DOCKER_CONTAINER_CHECK=$(docker ps -a | grep "$DOCKER_CONTAINER_NAME" | wc -l)
 if [[ $DOCKER_CONTAINER_CHECK -eq 0 ]]; then
-  NEW_DOCKER_CONTAINER=$(docker run -d --cap-add=NET_ADMIN --device=/dev/net/tun --name=$DOCKER_CONTAINER_NAME --dns=209.222.18.218 --dns=209.222.18.222 --restart=always -e "REGION=${PIA_REGION_ARRAY[0]}" -e "USERNAME=$PIA_USERNAME" -e "PASSWORD=$PIA_PASSWORD" -e "LOCAL_NETWORK=10.0.0.0/24" -v /etc/localtime:/etc/localtime:ro -p 8118:8118 $DOCKER_CONTAINER_IMAGE)
+  NEW_DOCKER_CONTAINER=$(docker run -d --cap-add=NET_ADMIN --device=/dev/net/tun --name=$DOCKER_CONTAINER_NAME --dns=209.222.18.218 --dns=8.8.8.8 --restart=always -e "REGION=${PIA_REGION_ARRAY[0]}" -e "USERNAME=$PIA_USERNAME" -e "PASSWORD=$PIA_PASSWORD" -e "LOCAL_NETWORK=10.0.0.0/24" -v /etc/localtime:/etc/localtime:ro -p 8118:8118 $DOCKER_CONTAINER_IMAGE)
   echo $TIMESTAMP: New docker container created with id: $NEW_DOCKER_CONTAINER >> $BASH_SCRIPT_RUN_LOGS
 
 else
